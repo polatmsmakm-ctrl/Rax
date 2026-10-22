@@ -7,11 +7,11 @@ OK RaXDownloader
 == RaX (all-in-one) ==
 OK RaX
 total 2304
-drwxr-xr-x  8 runner  staff     256 Oct 22 10:41 .
-drwxr-xr-x  8 runner  staff     256 Oct 22 10:40 ..
--rw-r--r--  1 runner  staff     113 Oct 22 10:41 build.log
-drwxr-xr-x  6 runner  staff     192 Oct 22 10:41 obj
--rwxr-xr-x  1 runner  staff  309344 Oct 22 10:41 RaX.dylib
--rwxr-xr-x  1 runner  staff  287104 Oct 22 10:41 RaXAds.dylib
--rwxr-xr-x  1 runner  staff  289376 Oct 22 10:41 RaXDownloader.dylib
--rwxr-xr-x  1 runner  staff  282576 Oct 22 10:41 RaXFix.dylib
+drwxr-xr-x  8 runner  staff     256 Oct 22 10:45 .
+drwxr-xr-x  8 runner  staff     256 Oct 22 10:45 ..
+-rw-r--r--  1 runner  staff     113 Oct 22 10:45 build.log
+drwxr-xr-x  6 runner  staff     192 Oct 22 10:45 obj
+-rwxr-xr-x  1 runner  staff  309760 Oct 22 10:45 RaX.dylib
+-rwxr-xr-x  1 runner  staff  287104 Oct 22 10:45 RaXAds.dylib
+-rwxr-xr-x  1 runner  staff  289792 Oct 22 10:45 RaXDownloader.dylib
+-rwxr-xr-x  1 runner  staff  282576 Oct 22 10:45 RaXFix.dylib
