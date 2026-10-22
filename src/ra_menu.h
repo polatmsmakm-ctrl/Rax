@@ -50,6 +50,7 @@ static NSString *raIcon(NSString *k) {
     if ([k hasPrefix:@"x.unmute"]) return @"speaker.wave.2.fill";
     if ([k hasPrefix:@"x.hide"]) return @"rectangle.bottomthird.inset.filled";
     if ([k hasPrefix:@"x.ads"]) return @"nosign";
+    if ([k hasPrefix:@"x.dl"]) return @"arrow.down.circle.fill";
     return @"sparkles";
 }
 
