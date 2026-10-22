@@ -1,0 +1,53 @@
+== RaXFix ==
+Undefined symbols for architecture arm64:
+  "_CGPointZero", referenced from:
+      +[RaOpener pan:] in RaXFix-25a4a9.o
+  "_CGSizeZero", referenced from:
+      -[RaMenuVC viewDidLoad] in RaXFix-25a4a9.o
+  "_OBJC_CLASS_$_CABasicAnimation", referenced from:
+       in RaXFix-25a4a9.o
+  "_OBJC_CLASS_$_CAGradientLayer", referenced from:
+       in RaXFix-25a4a9.o
+  "_OBJC_CLASS_$_CAMediaTimingFunction", referenced from:
+       in RaXFix-25a4a9.o
+  "_kCAMediaTimingFunctionEaseInEaseOut", referenced from:
+      -[RaMenuVC viewDidLoad] in RaXFix-25a4a9.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+== RaXAds ==
+Undefined symbols for architecture arm64:
+  "_CGPointZero", referenced from:
+      +[RaOpener pan:] in RaXAds-fc4a3b.o
+  "_CGSizeZero", referenced from:
+      -[RaMenuVC viewDidLoad] in RaXAds-fc4a3b.o
+  "_OBJC_CLASS_$_CABasicAnimation", referenced from:
+       in RaXAds-fc4a3b.o
+  "_OBJC_CLASS_$_CAGradientLayer", referenced from:
+       in RaXAds-fc4a3b.o
+  "_OBJC_CLASS_$_CAMediaTimingFunction", referenced from:
+       in RaXAds-fc4a3b.o
+  "_kCAMediaTimingFunctionEaseInEaseOut", referenced from:
+      -[RaMenuVC viewDidLoad] in RaXAds-fc4a3b.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+== RaX (all-in-one) ==
+Undefined symbols for architecture arm64:
+  "_CGPointZero", referenced from:
+      +[RaOpener pan:] in ra_impl.o
+  "_CGSizeZero", referenced from:
+      -[RaMenuVC viewDidLoad] in ra_impl.o
+  "_OBJC_CLASS_$_CABasicAnimation", referenced from:
+       in ra_impl.o
+  "_OBJC_CLASS_$_CAGradientLayer", referenced from:
+       in ra_impl.o
+  "_OBJC_CLASS_$_CAMediaTimingFunction", referenced from:
+       in ra_impl.o
+  "_kCAMediaTimingFunctionEaseInEaseOut", referenced from:
+      -[RaMenuVC viewDidLoad] in ra_impl.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+total 8
+drwxr-xr-x  4 runner  staff   128 Oct 22 10:36 .
+drwxr-xr-x  7 runner  staff   224 Oct 22 10:35 ..
+-rw-r--r--  1 runner  staff  2047 Oct 22 10:36 build.log
+drwxr-xr-x  5 runner  staff   160 Oct 22 10:36 obj
