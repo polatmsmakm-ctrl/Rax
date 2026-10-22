@@ -12,6 +12,7 @@
 
 static const void *kURLKey = &kURLKey;
 static const void *kHeldKey = &kHeldKey;
+static const void *kBadgeKey = &kBadgeKey;
 
 static void saveImage(UIImage *img) {
     if (!img) { igdToast(@"ما لقيت صورة محفوظة — جرّب تضغط وهي ظاهرة كاملة"); return; }
@@ -78,30 +79,72 @@ static void addHold(UIView *v) {
     [v addGestureRecognizer:lp];
 }
 
+// ---- visible download badge, video attachments only --------------------------------------
+@interface RaXDLBadge : NSObject
++ (void)tap:(UIButton *)b;
+@end
+@implementation RaXDLBadge
++ (void)tap:(UIButton *)b {
+    UIView *v = b.superview;
+    NSURL *url = v ? objc_getAssociatedObject(v, kURLKey) : nil;
+    [[UIImpactFeedbackGenerator new] impactOccurred];
+    saveVideoURL(url);
+}
+@end
+
+static void placeBadge(UIView *v) {
+    BOOL show = raOn(@"x.dl.badge") && objc_getAssociatedObject(v, kURLKey) != nil;
+    UIButton *badge = objc_getAssociatedObject(v, kBadgeKey);
+    if (!show) { badge.hidden = YES; return; }
+    if (!badge) {
+        badge = [UIButton buttonWithType:UIButtonTypeCustom];
+        badge.bounds = CGRectMake(0, 0, 34, 34);
+        badge.backgroundColor = [UIColor colorWithWhite:1 alpha:0.92];
+        badge.layer.cornerRadius = 17;
+        badge.layer.shadowColor = UIColor.blackColor.CGColor;
+        badge.layer.shadowOpacity = 0.35;
+        badge.layer.shadowRadius = 3;
+        badge.layer.shadowOffset = CGSizeMake(0, 1);
+        UIImageSymbolConfiguration *cfg = [UIImageSymbolConfiguration configurationWithPointSize:15 weight:UIImageSymbolWeightBold];
+        [badge setImage:[UIImage systemImageNamed:@"arrow.down.circle.fill" withConfiguration:cfg] forState:UIControlStateNormal];
+        badge.tintColor = UIColor.blackColor;
+        [badge addTarget:[RaXDLBadge class] action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+        [v addSubview:badge];
+        objc_setAssociatedObject(v, kBadgeKey, badge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    badge.center = CGPointMake(v.bounds.size.width - 27, v.bounds.size.height - 27);
+    badge.hidden = NO;
+    [v bringSubviewToFront:badge];
+}
+
 static void hookMediaAttachmentView(void) {
     const char *C = "T1MediaAttachmentView";
     igdHook(C, "layoutSubviews", ^id(IMP orig, SEL s, char ret, unsigned nargs) {
         if (ret != 'v' || nargs != 0) return nil;
-        return ^(UIView *self) { ((void (*)(id, SEL))orig)(self, s); addHold(self); };
+        return ^(UIView *self) { ((void (*)(id, SEL))orig)(self, s); addHold(self); placeBadge(self); };
     });
     igdHook(C, "_setPlayerWithMediaURL:", ^id(IMP orig, SEL s, char ret, unsigned nargs) {
         if (ret != 'v' || nargs != 1) return nil;
-        return ^(id self, NSURL *url) {
+        return ^(UIView *self, NSURL *url) {
             ((void (*)(id, SEL, id))orig)(self, s, url);
             objc_setAssociatedObject(self, kURLKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            placeBadge(self);
         };
     });
-    // cell/view gets reused for a different tweet — drop any stale captured URL
+    // cell/view gets reused for a different tweet — drop any stale captured URL/badge state
     igdHook(C, "setAttachment:", ^id(IMP orig, SEL s, char ret, unsigned nargs) {
         if (ret != 'v' || nargs != 1) return nil;
-        return ^(id self, id att) {
+        return ^(UIView *self, id att) {
             objc_setAssociatedObject(self, kURLKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             ((void (*)(id, SEL, id))orig)(self, s, att);
+            placeBadge(self);
         };
     });
 }
 
 __attribute__((constructor)) static void init(void) {
+    raRegister(@"التنزيل", @"x.dl.badge", @"علامة تنزيل ظاهرة على الفيديو",
+               @"دائرة ⬇ بزاوية الفيديو، تظهر بمجرد ما يشتغل الفيديو، واضغطها تحفظه فوراً");
     raRegister(@"التنزيل", @"x.dl.press", @"تحميل الصور والفيديو بالضغط المطوّل",
                @"اضغط مطوّل نص ثانية على أي صورة أو فيديو بالتايملاين لحفظه بالصور. الفيديو يحتاج يشتغل لحظة وحدة قبل أول مرة");
     igdRun(@"RaXDownloader", BUILD, ^{ hookMediaAttachmentView(); });
