@@ -2,13 +2,16 @@
 OK RaXFix
 == RaXAds ==
 OK RaXAds
+== RaXDownloader ==
+OK RaXDownloader
 == RaX (all-in-one) ==
 OK RaX
-total 1696
-drwxr-xr-x  7 runner  staff     224 Oct 22 10:37 .
-drwxr-xr-x  8 runner  staff     256 Oct 22 10:37 ..
--rw-r--r--  1 runner  staff      76 Oct 22 10:37 build.log
-drwxr-xr-x  5 runner  staff     160 Oct 22 10:37 obj
--rwxr-xr-x  1 runner  staff  288912 Oct 22 10:37 RaX.dylib
--rwxr-xr-x  1 runner  staff  287104 Oct 22 10:37 RaXAds.dylib
--rwxr-xr-x  1 runner  staff  282576 Oct 22 10:37 RaXFix.dylib
+total 2304
+drwxr-xr-x  8 runner  staff     256 Oct 22 10:41 .
+drwxr-xr-x  8 runner  staff     256 Oct 22 10:40 ..
+-rw-r--r--  1 runner  staff     113 Oct 22 10:41 build.log
+drwxr-xr-x  6 runner  staff     192 Oct 22 10:41 obj
+-rwxr-xr-x  1 runner  staff  309344 Oct 22 10:41 RaX.dylib
+-rwxr-xr-x  1 runner  staff  287104 Oct 22 10:41 RaXAds.dylib
+-rwxr-xr-x  1 runner  staff  289376 Oct 22 10:41 RaXDownloader.dylib
+-rwxr-xr-x  1 runner  staff  282576 Oct 22 10:41 RaXFix.dylib
